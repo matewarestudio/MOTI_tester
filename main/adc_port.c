@@ -10,7 +10,7 @@
 
 const static char *TAG = "adc_port.c";
 
-#define ADC_BW ADC_BITWIDTH_DEFAULT
+#define ADC_BW ADC_BITWIDTH_12
 #define ADC_ATT ADC_ATTEN_DB_12
 
 adc_oneshot_unit_handle_t adc1_handle;
@@ -23,16 +23,6 @@ adc_oneshot_chan_cfg_t config = {
     .atten = ADC_ATT,
 };
 
-// adc_oneshot_unit_handle_t adc1_handle_2;
-// adc_oneshot_unit_init_cfg_t init_config_2 = {
-//     .unit_id = ADC_UNIT,
-// };
-
-// adc_oneshot_chan_cfg_t config_2 = {
-//     .bitwidth = ADC_BW,
-//     .atten = ADC_ATT,
-// };
-
 esp_err_t adc_init(void)
 {
 
@@ -40,11 +30,7 @@ esp_err_t adc_init(void)
 
   ESP_ERROR_CHECK(
       adc_oneshot_config_channel(adc1_handle, ADC_CH, &config));
-
-  // ESP_ERROR_CHECK(adc_oneshot_new_unit(&init_config_2, &adc1_handle_2));
-
-  // ESP_ERROR_CHECK(
-  //     adc_oneshot_config_channel(adc1_handle_2, ADC_CH_2, &config_2));
+      adc_oneshot_config_channel(adc1_handle, ADC_CH_2, &config);
 
   return ESP_OK;
 }
